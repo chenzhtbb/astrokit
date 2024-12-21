@@ -1,0 +1,26 @@
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "astrokit"
+version = "0.0.2"
+authors = [
+  { name="Zhenhai CHEN", email="chenzhtbb@163.com" },
+]
+description = "astronomy image processing kit"
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies =[
+    "wget",
+    "numpy",
+    "scikit-image"
+]
+
+[project.urls]
+"Homepage" = "https://github.com/chenzhtbb/astrokit"
+"Bug Tracker" = "https://github.com/chenzhtbb/astrokit/issues"
