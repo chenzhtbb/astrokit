@@ -1,11 +1,11 @@
 from astrokit.image import Image
-from astrokit.utils import get_image_data, get_cwd
+from astrokit.utils import get_astrokit_data, get_cwd
 
-infile = get_image_data('imagingm31_1.fits')
+infile = get_astrokit_data('imagingm31_1.fits')
 im = Image(infile)
 
 # save image in different formats
-save_path = get_cwd(__file__) / 'data'
+save_path = get_cwd(__file__) / 'data/output'
 save_path.mkdir(parents=True, exist_ok=True)
 # fits image
 fits_file = save_path / 'imagingm31_1.fits'

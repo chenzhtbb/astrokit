@@ -1,7 +1,7 @@
-from src.astrokit.image import Image
-from src.astrokit.utils import get_image_data
+from astrokit.image import Image
+from astrokit.utils import get_astrokit_data
 
-infile = get_image_data('imagingm31_1.fits')
+infile = get_astrokit_data('imagingm31_1.fits')
 im = Image(infile)
 im.show(title='Original Image')
 # add fixed dot source

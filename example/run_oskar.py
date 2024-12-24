@@ -1,17 +1,16 @@
 import shutil
 
-from astrokit.oskar import get_oskar_data, Oskar
-from astrokit.utils import get_pwd, get_logger
+from astrokit.oskar import Oskar
+from astrokit.utils import get_cwd, get_logger, get_astrokit_data
 from astrokit.image import Image
 
-
 def init(task: str, logger):
-    run_path = get_pwd(__file__)
+    run_path = get_cwd(__file__)
     task_run = run_path / 'data' / task
     if not task_run.exists():
         task_run.mkdir(parents=True, exist_ok=True)
-        shutil.copy(get_oskar_data('oskar_sim_interferometer.ini'), task_run)
-        shutil.copy(get_oskar_data('oskar_imager.ini'), task_run)
+        shutil.copy(get_astrokit_data('oskar_sim_interferometer.ini'), task_run)
+        shutil.copy(get_astrokit_data('oskar_imager.ini'), task_run)
         raise RuntimeError(f'A new settings file has been created, please configure.')
     result_path = task_run / 'result'
     vis_path = result_path / 'vis'
@@ -60,7 +59,8 @@ def run():
     vis_name = vis_path / (output_file + '.vis')
     oskar.set('interferometer/oskar_vis_filename', vis_name.relative_to(run_path))
     # run oskar_sim_interferometer task
-    oskar.run(capture_output=True)
+    # You can use oskar.run(capture_output=False) if you don't need the output.
+    oskar.run()
 
     # ==================== oskar_imager =================================================
     oskar.use_task('oskar_imager', imager)
@@ -69,7 +69,8 @@ def run():
     oskar.set('image/input_vis_data', vis_name.relative_to(run_path))
     oskar.set('image/root_path', image_name.relative_to(run_path))
     # run oskar_imager task
-    oskar.run(capture_output=True)
+    # You can use oskar.run(capture_output=False) if you don't need the output.
+    oskar.run()
 
     # show fits image
     fits_show(image_name, run_path)

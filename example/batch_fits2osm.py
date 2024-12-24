@@ -1,8 +1,8 @@
 import subprocess
 
-from astrokit.utils import get_pwd, get_logger, get_file_list, get_path_name, get_astrokit_script
+from astrokit.utils import get_cwd, get_logger, get_file_list, get_path_name, get_astrokit_script
 
-run_path = get_pwd(__file__) / 'test/oskar'
+run_path = get_cwd(__file__) / 'data'
 input_path = run_path.joinpath('fits')
 output_path = run_path.joinpath('osm')
 script = get_astrokit_script('fits2skymodel.py')
