@@ -156,9 +156,8 @@ class Image(object):
         :param power: dot source power
         :return: image data after adding dot source
         """
-        data = np.flipud(self.get_data())
+        data = self.get_data()
         data = add_dot_source(data, num, seed, sigma, x, y, power)
-        data = np.flipud(data)
         for _ in range(len(self.shape) - len(data.shape)):
             data = data[np.newaxis, ...]
         self.set_data(data)
