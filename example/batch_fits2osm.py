@@ -1,13 +1,11 @@
 import subprocess
 
-from astrokit.utils import get_pwd, get_script, get_logger, get_file_list
+from astrokit.utils import get_pwd, get_logger, get_file_list, get_path_name, get_astrokit_script
 
 run_path = get_pwd(__file__) / 'test/oskar'
 input_path = run_path.joinpath('fits')
 output_path = run_path.joinpath('osm')
-script = get_script('fits2skymodel.py')
-
-logger = get_logger()
+script = get_astrokit_script('fits2skymodel.py')
 
 PARAMS = {
     # overwrite existing file
@@ -38,13 +36,9 @@ PARAMS = {
     # 'outfile': ''
 }
 
-def get_osm_name(fits_name):
-    osm_name = output_path / fits_name.name
-    osm_name = osm_name.with_suffix('.osm')
-    return osm_name
-
 
 def run():
+    logger = get_logger()
     output_path.mkdir(parents=True, exist_ok=True)
     args = []
     for key, value in PARAMS.items():
@@ -55,12 +49,13 @@ def run():
     logger.info(f'Using params {args}')
     logger.info(f'==================================================')
     for _fits in get_file_list(input_path, '*.fits'):
-        osm = get_osm_name(_fits)
+        osm = output_path / _fits.name
+        osm = osm.with_suffix('.osm')
         if osm.exists():
             logger.info(f'{osm.name} already exists. Skipping...')
             continue
         logger.info(f'Converting {_fits.name} to {osm.name}')
-        subprocess.run(['python', f'%s' % script, f'%s' % _fits, f'%s' % osm] + args)
+        subprocess.run(['python', get_path_name(script), get_path_name(_fits), get_path_name(osm)] + args)
     logger.info(f'==================================================')
     logger.info(f'All done!')
 

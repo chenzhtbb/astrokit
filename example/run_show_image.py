@@ -1,9 +1,6 @@
-from astrokit.utils import get_pwd
-
+from astrokit.utils import get_image_data
 from astrokit.image import Image
 
-run_path = get_pwd(__file__)
-fitsfile = run_path / 'test/oskar/example_I.fits'
-im = Image(fitsfile)
+infile = get_image_data('imagingm31_1.fits')
+im = Image(infile)
 im.show()
-im.save(fitsfile.with_suffix('.tiff'))
