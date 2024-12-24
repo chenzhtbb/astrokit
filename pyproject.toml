@@ -3,8 +3,8 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "astrokit"
-version = "0.0.4"
+name = "astronomy-kit"
+version = "0.0.5"
 authors = [
   { name="Zhenhai CHEN", email="chenzhtbb@163.com" },
 ]

@@ -1,6 +1,6 @@
 test/
 dist/
-src/astrokit.egg-info/
+src/*.egg-info/
 src/**/data/
 example/data/
 
