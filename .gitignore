@@ -1,7 +1,7 @@
 test/
 dist/
-src/astrokit.egg-info
-data/
+src/astrokit.egg-info/
+src/**/data/
 
 .idea
 .env
