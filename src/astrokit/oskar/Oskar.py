@@ -2,9 +2,7 @@ import os
 import pathlib
 import subprocess
 
-from astrokit.utils import get_logger
-
-from astrokit.utils import is_linux, get_path_name, search_program
+from ..utils import is_linux, get_path_name, search_program, get_logger
 
 
 class Oskar(object):
@@ -43,7 +41,9 @@ class Oskar(object):
     def run_oskar(self, command, **kwargs):
         if self.use_singularity:
             command = self.singularity_command(command)
-        result = subprocess.run(command, env=self.envs, cwd=self.run_path, capture_output=kwargs.get('capture_output', False), text=kwargs.get('capture_output', False))
+        result = subprocess.run(command, env=self.envs, cwd=self.run_path,
+                                capture_output=kwargs.get('capture_output', False),
+                                text=kwargs.get('capture_output', False))
         return result
 
     def use_task(self, task_name='oskar_sim_interferometer', ini=None, check=True):
